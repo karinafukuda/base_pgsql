@@ -1,4 +1,4 @@
-create or replace function ListAlianca ()
+create or replace function ListDiretoria ()
 RETURNS TABLE (id int, nome varchar, ativo boolean, ultima_alteracao timestamp, usuario_alteracao varchar)
 language 'plpgsql' 
 as
@@ -6,16 +6,16 @@ $$
 begin
     RETURN QUERY
     SELECT 
-    alianca.id,
-    alianca.nome,
-    alianca.ativo,
-    alianca.ultima_alteracao,
-    alianca.usuario_alteracao
-    FROM alianca;
+    diretoria.id,
+    diretoria.nome,
+    diretoria.ativo,
+    diretoria.ultima_alteracao,
+    diretoria.usuario_alteracao
+    FROM diretoria;
 end    
 $$;
 
-create or replace function ListAlocacao ()
+create or replace function ListStatusAlocacao ()
 RETURNS TABLE (id int, status varchar, ativo boolean, ultima_alteracao timestamp, usuario_alteracao varchar)
 language 'plpgsql' 
 as
@@ -23,12 +23,12 @@ $$
 begin
     RETURN QUERY
     SELECT 
-    alocacao.id,
-    alocacao.status,
-    alocacao.ativo,
-    alocacao.ultima_alteracao,
-    alocacao.usuario_alteracao
-    FROM alocacao;
+    status_alocacao.id,
+    status_alocacao.status,
+    status_alocacao.ativo,
+    status_alocacao.ultima_alteracao,
+    status_alocacao.usuario_alteracao
+    FROM status_alocacao;
 end    
 $$;
 
@@ -69,7 +69,7 @@ end
 $$;
 
 create or replace function ListColaborador ()
-RETURNS TABLE (matricula int, id_alocacao int, id_comunidade int, id_cargo int, nome varchar, email varchar, ativo boolean, ultima_alteracao timestamp, usuario_alteracao varchar)
+RETURNS TABLE (matricula int, id_status_alocacao int, id_gestao int, id_cargo int, nome varchar, email varchar, ativo boolean, ultima_alteracao timestamp, usuario_alteracao varchar)
 language 'plpgsql' 
 as
 $$
@@ -77,8 +77,8 @@ begin
     RETURN QUERY
     SELECT 
     colaborador.matricula,
-    colaborador.id_alocacao,
-    colaborador.id_comunidade,
+    colaborador.id_status_alocacao,
+    colaborador.id_gestao,
     colaborador.id_cargo,
     colaborador.nome,
     colaborador.email,
@@ -89,41 +89,22 @@ begin
 end    
 $$;
 
-create or replace function ListComunidade ()
-RETURNS TABLE (id int, id_alianca int, id_cliente int, nome varchar, ativo boolean, ultima_alteracao timestamp, usuario_alteracao varchar)
+create or replace function ListGestao ()
+RETURNS TABLE (id int, id_diretoria int, id_cliente int, nome varchar, ativo boolean, ultima_alteracao timestamp, usuario_alteracao varchar)
 language 'plpgsql' 
 as
 $$
 begin
     RETURN QUERY
     SELECT 
-    comunidade.id,
-    comunidade.id_alianca,
-    comunidade.id_cliente,
-    comunidade.nome,
-    comunidade.ativo,
-    comunidade.ultima_alteracao,
-    comunidade.usuario_alteracao
-    FROM comunidade;
-end    
-$$;
-
-create or replace function ListLideres ()
-RETURNS TABLE (id int, id_comunidade int, nome varchar, tipo varchar, ativo boolean, ultima_alteracao timestamp, usuario_alteracao varchar)
-language 'plpgsql' 
-as
-$$
-begin
-    RETURN QUERY
-    SELECT 
-    lideres.id,
-    lideres.id_comunidade,
-    lideres.nome,
-    lideres.tipo,
-    lideres.ativo,
-    lideres.ultima_alteracao,
-    lideres.usuario_alteracao
-    FROM lideres;
+    gestao.id,
+    gestao.id_diretoria,
+    gestao.id_cliente,
+    gestao.nome,
+    gestao.ativo,
+    gestao.ultima_alteracao,
+    gestao.usuario_alteracao
+    FROM gestao;
 end    
 $$;
 
@@ -144,4 +125,4 @@ begin
 end    
 $$;
 
---ok --falta testar
+--ok 

@@ -1,30 +1,30 @@
-create or replace function UpdateAlianca(id_alianca int, nome_alianca varchar, ativo_alianca boolean, usuario_alteracao_alianca varchar)
+create or replace function UpdateDiretoria(id_diretoria int, nome_diretoria varchar, ativo_diretoria boolean, usuario_alteracao_diretoria varchar)
 RETURNS void
 language 'plpgsql'
 as
 $$
 begin
-    UPDATE alianca SET
-        nome = nome_alianca,
-        ativo = ativo_alianca,
+    UPDATE diretoria SET
+        nome = nome_diretoria,
+        ativo = ativo_diretoria,
         ultima_alteracao = NOW(),
-        usuario_alteracao = usuario_alteracao_alianca
-    WHERE id = id_alianca;
+        usuario_alteracao = usuario_alteracao_diretoria
+    WHERE id = id_diretoria;
 end
 $$;
 
-create or replace function UpdateAlocacao(id_alocacao int, status_alocacao varchar, ativo_alocacao boolean, usuario_alteracao_alocacao varchar)
+create or replace function UpdateStatusAlocacao(id_status_alocacao int, status_status_alocacao varchar, ativo_status_alocacao boolean, usuario_alteracao_status_alocacao varchar)
 RETURNS void
 language 'plpgsql'
 as
 $$
 begin
-    UPDATE alocacao SET
-        status = status_alocacao,
-        ativo = ativo_alocacao,
+    UPDATE status_alocacao SET
+        status = status_status_alocacao,
+        ativo = ativo_status_alocacao,
         ultima_alteracao = NOW(),
-        usuario_alteracao = usuario_alteracao_alocacao
-    WHERE id = id_alocacao;
+        usuario_alteracao = usuario_alteracao_status_alocacao
+    WHERE id = id_status_alocacao;
 end
 $$;
 
@@ -60,15 +60,15 @@ begin
 end
 $$;
 
-create or replace function UpdateColaborador (matricula_colaborador int, id_alocacao_colaborador int, id_comunidade_colaborador int, id_cargo_colaborador int, nome_colaborador varchar, email_colaborador varchar, ativo_colaborador boolean, usuario_alteracao_colaborador varchar)
+create or replace function UpdateColaborador (matricula_colaborador int, id_alocacao_colaborador int, id_gestao_colaborador int, id_cargo_colaborador int, nome_colaborador varchar, email_colaborador varchar, ativo_colaborador boolean, usuario_alteracao_colaborador varchar)
 RETURNS void
 language 'plpgsql'
 as
 $$
 begin
     UPDATE colaborador SET
-        id_alocacao = id_alocacao_colaborador,
-        id_comunidade = id_comunidade_colaborador,
+        id_status_alocacao = id_status_alocacao_colaborador,
+        id_gestao = id_gestao_colaborador,
         id_cargo = id_cargo_colaborador,
         nome = nome_colaborador,
         email = email_colaborador,
@@ -79,37 +79,20 @@ begin
 end
 $$;
 
-create or replace function UpdateComunidade(id_comunidade int, id_alianca_comunidade int, id_cliente_comunidade int, nome_comunidade varchar, ativo_comunidade boolean, usuario_alteracao_comunidade varchar)
+create or replace function UpdateGestao(id_gestao int, id_diretoria_gestao int, id_cliente_gestao int, nome_gestao varchar, ativo_gestao boolean, usuario_alteracao_gestao varchar)
 RETURNS void
 language 'plpgsql'
 as
 $$
 begin
-    UPDATE comunidade SET
-        id_alianca = id_alianca_comunidade,
-        id_cliente = id_cliente_comunidade,
-        nome = nome_comunidade,
-        ativo = ativo_comunidade,
+    UPDATE gestao SET
+        id_diretoria = id_diretoria_gestao,
+        id_cliente = id_cliente_gestao,
+        nome = nome_gestao,
+        ativo = ativo_gestao,
         ultima_alteracao = NOW(),
-        usuario_alteracao = usuario_alteracao_comunidade
-    WHERE id = id_comunidade;
-end
-$$;
-
-create or replace function UpdateLideres(id_lideres int, id_comunidade_lideres int, nome_lideres int, tipo_lideres varchar, ativo_lideres boolean, usuario_alteracao_lideres varchar)
-RETURNS void
-language 'plpgsql'
-as
-$$
-begin
-    UPDATE lideres SET
-        id_comunidade = id_comunidade_lideres,
-        nome = nome_lideres,
-        tipo = tipo_lideres,
-        ativo = ativo_lideres,
-        ultima_alteracao = NOW(),
-        usuario_alteracao = usuario_alteracao_lideres
-    WHERE id = id_lideres;
+        usuario_alteracao = usuario_alteracao_gestao
+    WHERE id = id_gestao;
 end
 $$;
 
@@ -128,4 +111,4 @@ begin
 end
 $$;
 
---ok --falta testar
+--ok 

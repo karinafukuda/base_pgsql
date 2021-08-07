@@ -1,22 +1,22 @@
-create or replace function DeleteAlianca(id_alianca int)
+create or replace function DeleteDiretoria(id_diretoria int)
 RETURNS void
 language 'plpgsql'
 as
 $$
 begin
-    DELETE FROM alianca 
-    Where alianca.id = id_alianca;
+    DELETE FROM diretoria 
+    Where diretoria.id = id_diretoria;
 end
 $$;
 
-create or replace function DeleteAlocacao (id_alocacao int)
+create or replace function DeleteStatusAlocacao (status_alocacao int)
 RETURNS void
 language 'plpgsql'
 as
 $$
 begin
-    DELETE FROM alocacao 
-    Where alocacao.id = id_alocacao;
+    DELETE FROM status_alocacao 
+    Where status_alocacao.id = status_alocacao;
 end
 $$;
 
@@ -53,25 +53,14 @@ WHERE matricula = matricula_colaborador;
 end
 $$;
 
-create or replace function DeleteComunidade (id_comunidade int)
+create or replace function DeleteGestao (id_gestao int)
 RETURNS void
 language 'plpgsql'
 as
 $$
 begin
-    DELETE FROM comunidade 
-    Where comunidade.id = id_comunidade;
-end
-$$;
-
-create or replace function DeleteLideres (id_lideres int)
-RETURNS void
-language 'plpgsql'
-as
-$$
-begin
-    DELETE FROM lideres 
-    Where lideres.id = id_lideres;
+    DELETE FROM gestao 
+    Where gestao.id = id_gestao;
 end
 $$;
 
@@ -85,5 +74,4 @@ begin
     Where squad.id = id_squad;
 end
 $$;
-
---deu ok --falta testar
+--ok

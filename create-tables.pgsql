@@ -1,8 +1,8 @@
--- Database: Base-Alocacao
+-- Database: Base 
 
--- DROP DATABASE "Base-Alocacao";
+-- DROP DATABASE "Base";
 
-CREATE TABLE alianca (
+CREATE TABLE diretoria (
     id serial ,
     nome varchar (120) not null,
     ativo boolean not null,
@@ -31,35 +31,21 @@ CREATE TABLE cliente (
     FOREIGN KEY (id_squad) REFERENCES squad (id)
 );
 
-CREATE TABLE comunidade (
+CREATE TABLE gestao (
     id serial ,
-    id_alianca int not null,
+    id_diretoria int not null,
     id_cliente int not null,
     nome varchar (120) not null,
     ativo boolean not null,
     ultima_alteracao timestamp not null,
     usuario_alteracao varchar (200) not null,
     PRIMARY KEY (id),
-    FOREIGN KEY (id_alianca) REFERENCES alianca (id),
+    FOREIGN KEY (id_diretoria) REFERENCES diretoria (id),
     FOREIGN KEY (id_cliente) REFERENCES cliente (id)
 
 );
 
-CREATE TABLE lideres (
-    id serial ,
-    id_comunidade int not null ,
-    nome varchar (120) not null,
-    tipo varchar (120) not null,
-    ativo boolean not null,
-    ultima_alteracao timestamp not null,
-    usuario_alteracao varchar (200) not null,
-    PRIMARY KEY (id),
-    FOREIGN KEY (id_comunidade) REFERENCES comunidade (id)
-);
-
-
-
-CREATE TABLE alocacao (
+CREATE TABLE status_alocacao (
     id serial ,
     status varchar (20) not null,
     ativo boolean not null,
@@ -80,8 +66,8 @@ CREATE TABLE cargo (
 
 CREATE TABLE colaborador (
     matricula int ,
-    id_alocacao int not null ,
-    id_comunidade int not null,
+    id_status_alocacao int not null ,
+    id_coordenacao int not null,
     id_cargo int not null,
     nome varchar (120) not null,
     email varchar (120) not null,
@@ -89,8 +75,8 @@ CREATE TABLE colaborador (
     ultima_alteracao timestamp not null,
     usuario_alteracao varchar (200) not null,
     PRIMARY KEY (matricula),
-    FOREIGN KEY (id_alocacao) REFERENCES alocacao (id),
-    FOREIGN KEY (id_comunidade) REFERENCES comunidade (id),
+    FOREIGN KEY (id_status_alocacao) REFERENCES status_alocacao (id),
+    FOREIGN KEY (id_gestao) REFERENCES gestao (id),
     FOREIGN KEY (id_cargo) REFERENCES cargo (id)
 );
 
